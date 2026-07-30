@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#7c3aed">
+<title>About - RAAZ4</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:#ffffff;min-height:100vh;
+  color:#1e1b4b;padding-bottom:40px;
+}
+.hdr{
+  background:#ffffff;
+  border-bottom:1.5px solid #e0e7ff;
+  padding:12px 16px;
+  display:flex;align-items:center;gap:12px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(124,58,237,.08);
+}
+.bk{
+  background:#f3f0ff;border:none;
+  color:#7c3aed;width:36px;height:36px;
+  border-radius:50%;cursor:pointer;
+  font-size:1em;font-weight:800;
+}
+.hdr-t{
+  font-size:1em;font-weight:800;
+  color:#7c3aed;
+}
+.wrap{padding:20px 16px}
+
+/* Hero */
+.hero{
+  text-align:center;
+  padding:30px 20px;
+  background:linear-gradient(135deg,#f3f0ff,#ede9fe);
+  border:1.5px solid #e0e7ff;
+  border-radius:20px;
+  margin-bottom:20px;
+}
+.hero .app-icon{
+  font-size:4em;
+  display:block;
+  margin-bottom:10px;
+}
+.hero h1{
+  font-size:2em;font-weight:900;
+  color:#7c3aed;letter-spacing:3px;
+  margin-bottom:4px;
+}
+.hero .tagline{
+  color:#6b7280;font-size:.85em;
+  font-weight:600;margin-bottom:12px;
+  letter-spacing:1px;
+}
+.version-badge{
+  display:inline-block;
+  padding:5px 16px;
+  background:#7c3aed;
+  border-radius:20px;
+  color:#fff;
+  font-size:.75em;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+/* Stats */
+.stats-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:16px;
+}
+.stat-card{
+  background:#f8f7ff;
+  border:1.5px solid #e0e7ff;
+  border-radius:14px;
+  padding:14px 10px;
+  text-align:center;
+}
+.stat-card .sv{
+  font-size:1.6em;font-weight:900;
+  color:#7c3aed;margin-bottom:4px;
+}
+.stat-card .sl{
+  font-size:.72em;color:#6b7280;
+  font-weight:600;
+}
+
+/* Section */
+.sec{
+  background:#f8f7ff;
+  border:1.5px solid #e0e7ff;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:12px;
+}
+.sec h2{
+  font-size:.95em;font-weight:800;
+  color:#7c3aed;margin-bottom:12px;
+  padding-bottom:8px;
+  border-bottom:1px solid #e0e7ff;
+  display:flex;align-items:center;gap:6px;
+}
+.sec p{
+  font-size:.84em;color:#374151;
+  line-height:1.75;margin-bottom:8px;
+}
+.sec p:last-child{margin-bottom:0}
+
+/* Feature List */
+.feat-list{
+  display:flex;flex-direction:column;gap:8px;
+}
+.feat-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;
+  background:#ffffff;
+  border:1.5px solid #e0e7ff;
+  border-radius:12px;
+}
+.feat-item .fi{font-size:1.4em;flex-shrink:0}
+.feat-item .ft{
+  font-size:.84em;font-weight:700;
+  color:#1e1b4b;
+}
+.feat-item .fd{
+  font-size:.75em;color:#6b7280;
+  margin-top:2px;font-weight:500;
+}
+
+/* Topic Categories */
+.cat-grid{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.cat-tag{
+  padding:5px 12px;
+  border-radius:20px;
+  font-size:.75em;
+  font-weight:700;
+  border:1.5px solid;
+}
+
+/* Developer Card */
+.dev-card{
+  background:linear-gradient(135deg,#f3f0ff,#ede9fe);
+  border:1.5px solid #e0e7ff;
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+  margin-bottom:12px;
+}
+.dev-card .dev-icon{
+  font-size:3em;margin-bottom:8px;
+}
+.dev-card h3{
+  font-size:1em;font-weight:900;
+  color:#1e1b4b;margin-bottom:4px;
+}
+.dev-card p{
+  color:#6b7280;font-size:.82em;
+  font-weight:600;margin-bottom:12px;
+}
+.dev-card a{
+  display:inline-block;
+  padding:10px 24px;
+  background:#7c3aed;
+  border-radius:12px;
+  color:#fff;font-size:.85em;
+  font-weight:800;text-decoration:none;
+}
+
+/* Links */
+.links{
+  display:flex;gap:8px;
+  margin-bottom:12px;
+}
+.link-btn{
+  flex:1;
+  padding:12px 8px;
+  background:#f8f7ff;
+  border:1.5px solid #e0e7ff;
+  border-radius:12px;
+  text-align:center;
+  text-decoration:none;
+  font-size:.78em;
+  font-weight:800;
+  color:#7c3aed;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.link-btn span{font-size:1.4em}
+
+/* Warning */
+.warn{
+  background:#fff7ed;
+  border:1.5px solid #fed7aa;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:12px;
+  text-align:center;
+}
+.warn p{
+  color:#92400e;font-size:.82em;
+  font-weight:600;line-height:1.6;
+}
+
+.copy{
+  text-align:center;
+  color:#9ca3af;font-size:.72em;
+  margin-top:16px;font-weight:600;
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <button class="bk" onclick="history.back()">←</button>
+  <div class="hdr-t">ℹ️ About RAAZ4</div>
+</div>
+
+<div class="wrap">
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="app-icon">🧠</span>
+    <h1>RAAZ4</h1>
+    <p class="tagline">DARK PSYCHOLOGY</p>
+    <span class="version-badge">Version 1.0</span>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="sv">90</div>
+      <div class="sl">📚 Topics</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">30+</div>
+      <div class="sl">🌍 Languages</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">450+</div>
+      <div class="sl">🎮 Quiz Questions</div>
+    </div>
+    <div class="stat-card">
+      <div class="sv">18+</div>
+      <div class="sl">⚠️ Age Rating</div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="sec">
+    <h2>🧠 About the App</h2>
+    <p>RAAZ4 is a comprehensive Dark Psychology educational app designed to help you understand the hidden aspects of human behavior, manipulation tactics, and psychological principles that most people never learn about.</p>
+    <p>Whether you want to protect yourself from manipulators, understand toxic relationships, or simply expand your psychological knowledge - RAAZ4 covers it all with deep, research-backed content.</p>
+  </div>
+
+  <!-- Features -->
+  <div class="sec">
+    <h2>✨ Features</h2>
+    <div class="feat-list">
+      <div class="feat-item">
+        <span class="fi">📚</span>
+        <div>
+          <div class="ft">90 Deep Psychology Topics</div>
+          <div class="fd">From basics to advanced forbidden knowledge</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <span class="fi">🔊</span>
+        <div>
+          <div class="ft">Voice Learning</div>
+          <div class="fd">Listen to topics in your language</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <span class="fi">🎮</span>
+        <div>
+          <div class="ft">Quiz Game</div>
+          <div class="fd">5 questions per topic with explanations</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <span class="fi">🌍</span>
+        <div>
+          <div class="ft">Multi-Language</div>
+          <div class="fd">Hindi, English and more languages</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <span class="fi">⭐</span>
+        <div>
+          <div class="ft">Score & Level System</div>
+          <div class="fd">Track your progress and earn points</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <span class="fi">📵</span>
+        <div>
+          <div class="ft">Works Offline</div>
+          <div class="fd">No internet needed after first load</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <span class="fi">🔒</span>
+        <div>
+          <div class="ft">100% Private</div>
+          <div class="fd">All data stored on your device only</div>
+        </div>
+      </div>
+      <div class="feat-item">
+        <span class="fi">🆓</span>
+        <div>
+          <div class="ft">Completely Free</div>
+          <div class="fd">No ads, no subscriptions, no payments</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topics -->
+  <div class="sec">
+    <h2>📚 Topic Categories</h2>
+    <div class="cat-grid">
+      <span class="cat-tag" style="color:#6366f1;border-color:#c7d2fe;background:#eef2ff">Foundation</span>
+      <span class="cat-tag" style="color:#ef4444;border-color:#fca5a5;background:#fef2f2">Dark Traits</span>
+      <span class="cat-tag" style="color:#f97316;border-color:#fdba74;background:#fff7ed">Manipulation</span>
+      <span class="cat-tag" style="color:#8b5cf6;border-color:#c4b5fd;background:#f5f3ff">Influence</span>
+      <span class="cat-tag" style="color:#06b6d4;border-color:#67e8f9;background:#ecfeff">Detection</span>
+      <span class="cat-tag" style="color:#d97706;border-color:#fcd34d;background:#fffbeb">Power</span>
+      <span class="cat-tag" style="color:#ec4899;border-color:#f9a8d4;background:#fdf2f8">Relationships</span>
+      <span class="cat-tag" style="color:#10b981;border-color:#6ee7b7;background:#ecfdf5">Society</span>
+      <span class="cat-tag" style="color:#7c3aed;border-color:#c4b5fd;background:#f5f3ff">Dark Society</span>
+      <span class="cat-tag" style="color:#b91c1c;border-color:#fca5a5;background:#fef2f2">Dark Emotions</span>
+      <span class="cat-tag" style="color:#1d4ed8;border-color:#93c5fd;background:#eff6ff">Classic Psych</span>
+      <span class="cat-tag" style="color:#6b7280;border-color:#d1d5db;background:#f9fafb">Protection</span>
+    </div>
+  </div>
+
+  <!-- Warning -->
+  <div class="warn">
+    <p>⚠️ RAAZ4 contains mature psychological content intended for users aged 18 and above. All content is for educational purposes only. Do not use this knowledge to harm others.</p>
+  </div>
+
+  <!-- Developer -->
+  <div class="dev-card">
+    <div class="dev-icon">👨‍💻</div>
+    <h3>RAAZ4 Team</h3>
+    <p>Built with passion for psychology education</p>
+    <a href="mailto:raaz4app@gmail.com">
+      📧 Contact Us
+    </a>
+  </div>
+
+  <!-- Links -->
+  <div class="links">
+    <a href="privacy.html" class="link-btn">
+      <span>🔒</span>Privacy
+    </a>
+    <a href="terms.html" class="link-btn">
+      <span>📋</span>Terms
+    </a>
+    <a href="index.html" class="link-btn">
+      <span>🏠</span>Home
+    </a>
+  </div>
+
+  <p class="copy">
+    © 2025 RAAZ4 - Dark Psychology App<br>
+    Version 1.0 | Educational Purpose Only
+  </p>
+
+</div>
+</body>
+</html>
