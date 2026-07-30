@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#7c3aed">
+<link rel="manifest" href="manifest.json">
+<title>RAAZ4 - Dark Psychology</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  min-height:100vh;
+  background:#ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.wrap{width:100%;max-width:420px}
+
+/* Logo */
+.logo{text-align:center;margin-bottom:32px}
+.logo-icon{
+  font-size:4em;
+  display:block;
+  margin-bottom:8px;
+  filter:drop-shadow(0 4px 12px rgba(124,58,237,.3));
+}
+.logo h1{
+  font-size:2.4em;
+  font-weight:900;
+  color:#7c3aed;
+  letter-spacing:4px;
+  margin-bottom:4px;
+}
+.logo p{
+  color:#6b7280;
+  font-size:.85em;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+.logo .badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:5px 16px;
+  background:#f3f0ff;
+  border:1.5px solid #e0e7ff;
+  border-radius:20px;
+  color:#7c3aed;
+  font-size:.75em;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+/* Card */
+.card{
+  background:#ffffff;
+  border:1.5px solid #e0e7ff;
+  border-radius:20px;
+  padding:28px 24px;
+  box-shadow:0 8px 30px rgba(124,58,237,.1);
+}
+
+/* Tabs */
+.tabs{
+  display:flex;
+  background:#f3f0ff;
+  border-radius:12px;
+  padding:4px;
+  margin-bottom:24px;
+  gap:4px;
+}
+.tab{
+  flex:1;
+  padding:11px;
+  border:none;
+  background:transparent;
+  color:#9ca3af;
+  font-size:.9em;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+  transition:all .3s;
+}
+.tab.active{
+  background:#7c3aed;
+  color:#fff;
+  box-shadow:0 2px 10px rgba(124,58,237,.35);
+}
+
+/* Form */
+.fg{margin-bottom:16px}
+.fg label{
+  display:block;
+  color:#374151;
+  font-size:.78em;
+  margin-bottom:6px;
+  font-weight:700;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+.fg input{
+  width:100%;
+  padding:13px 16px;
+  background:#f8f7ff;
+  border:1.5px solid #e0e7ff;
+  border-radius:12px;
+  color:#1e1b4b;
+  font-size:.95em;
+  outline:none;
+  transition:all .3s;
+  font-family:inherit;
+}
+.fg input:focus{
+  border-color:#7c3aed;
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(124,58,237,.1);
+}
+.fg input::placeholder{color:#d1d5db}
+
+/* Button */
+.btn{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(135deg,#7c3aed,#6366f1);
+  border:none;
+  border-radius:12px;
+  color:#fff;
+  font-size:1em;
+  font-weight:800;
+  cursor:pointer;
+  letter-spacing:.5px;
+  box-shadow:0 4px 15px rgba(124,58,237,.35);
+  transition:all .2s;
+  font-family:inherit;
+}
+.btn:active{transform:scale(.97);opacity:.9}
+
+/* Message */
+.msg{
+  text-align:center;
+  margin-top:14px;
+  padding:11px;
+  border-radius:10px;
+  font-size:.85em;
+  font-weight:600;
+  display:none;
+}
+.msg.s{
+  background:#d1fae5;
+  color:#065f46;
+  border:1.5px solid #a7f3d0;
+  display:block;
+}
+.msg.e{
+  background:#fee2e2;
+  color:#991b1b;
+  border:1.5px solid #fca5a5;
+  display:block;
+}
+.hidden{display:none!important}
+
+/* Footer */
+.footer{
+  text-align:center;
+  margin-top:20px;
+  color:#d1d5db;
+  font-size:.72em;
+}
+.footer a{color:#c4b5fd;text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="logo">
+    <span class="logo-icon">🧠</span>
+    <h1>RAAZ4</h1>
+    <p>Dark Psychology</p>
+    <span class="badge">90 Topics • Voice • Quiz</span>
+  </div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('login')">
+        🔑 Login
+      </button>
+      <button class="tab" onclick="showTab('reg')">
+        ✨ Register
+      </button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+      <div class="fg">
+        <label>Username</label>
+        <input type="text" id="lu" placeholder="Username daalo">
+      </div>
+      <div class="fg">
+        <label>Password</label>
+        <input type="password" id="lp" placeholder="Password daalo">
+      </div>
+      <button class="btn" onclick="login()">
+        🚀 Login Karo
+      </button>
+    </div>
+
+    <!-- Register Form -->
+    <div id="regForm" class="hidden">
+      <div class="fg">
+        <label>Pura Naam</label>
+        <input type="text" id="rn" placeholder="Apna naam likho">
+      </div>
+      <div class="fg">
+        <label>Username</label>
+        <input type="text" id="ru" placeholder="Username chunao">
+      </div>
+      <div class="fg">
+        <label>Password</label>
+        <input type="password" id="rp" placeholder="Min 4 characters">
+      </div>
+      <button class="btn" onclick="register()">
+        ✨ Account Banao
+      </button>
+    </div>
+
+    <div id="msg" class="msg"></div>
+  </div>
+
+  <div class="footer">
+    <a href="privacy.html">Privacy Policy</a> •
+    <a href="terms.html">Terms</a> •
+    <a href="about.html">About</a>
+  </div>
+</div>
+
+<script>
+// Service Worker register karo
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js');
+}
+
+// Already logged in hai to home pe bhejo
+if(localStorage.getItem('raaz4_user')){
+  location.href='home.html';
+}
+
+// Tab switch
+function showTab(t){
+  document.querySelectorAll('.tab').forEach((b,i)=>{
+    b.classList.toggle('active',
+      (i===0&&t==='login')||(i===1&&t==='reg'));
+  });
+  document.getElementById('loginForm')
+    .classList.toggle('hidden',t!=='login');
+  document.getElementById('regForm')
+    .classList.toggle('hidden',t!=='reg');
+  document.getElementById('msg').className='msg';
+}
+
+// Message dikhao
+function showMsg(txt,type){
+  const m=document.getElementById('msg');
+  m.textContent=txt;
+  m.className='msg '+type;
+}
+
+// Users LocalStorage se
+function getUsers(){
+  return JSON.parse(localStorage.getItem('raaz4_users')||'[]');
+}
+function saveUsers(u){
+  localStorage.setItem('raaz4_users',JSON.stringify(u));
+}
+
+// Login
+function login(){
+  const username=document.getElementById('lu').value.trim();
+  const password=document.getElementById('lp').value;
+  if(!username||!password)
+    return showMsg('⚠️ Sab fields bharo!','e');
+  const u=getUsers().find(
+    x=>x.username===username&&x.password===password
+  );
+  if(u){
+    localStorage.setItem('raaz4_user',JSON.stringify(u));
+    showMsg('✅ Welcome '+u.name+'!','s');
+    setTimeout(()=>location.href='home.html',800);
+  }else{
+    showMsg('❌ Username ya Password galat!','e');
+  }
+}
+
+// Register
+function register(){
+  const name=document.getElementById('rn').value.trim();
+  const username=document.getElementById('ru').value.trim();
+  const password=document.getElementById('rp').value;
+  if(!name||!username||!password)
+    return showMsg('⚠️ Sab fields bharo!','e');
+  if(password.length<4)
+    return showMsg('⚠️ Password 4+ characters ka ho!','e');
+  const users=getUsers();
+  if(users.find(u=>u.username===username))
+    return showMsg('❌ Username pehle se hai!','e');
+  const newUser={
+    name,username,password,
+    score:0,level:1,
+    completedTopics:[],
+    joined:new Date().toISOString()
+  };
+  users.push(newUser);
+  saveUsers(users);
+  showMsg('🎉 Account ban gaya! Login karo!','s');
+  setTimeout(()=>showTab('login'),1500);
+}
+</script>
+</body>
+</html>
