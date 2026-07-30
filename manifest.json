@@ -1,0 +1,50 @@
+{
+  "name": "RAAZ4 - Dark Psychology",
+  "short_name": "RAAZ4",
+  "description": "Dark Psychology educational app with 90 topics, voice learning and quiz game",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "lang": "hi",
+  "categories": ["education", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Learn Topics",
+      "short_name": "Learn",
+      "description": "Go to topics",
+      "url": "/home.html",
+      "icons": [{"src": "icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "Quiz Game",
+      "short_name": "Quiz",
+      "description": "Play quiz",
+      "url": "/quiz.html",
+      "icons": [{"src": "icon-192.png", "sizes": "192x192"}]
+    }
+  ]
+}
