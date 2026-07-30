@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#7c3aed">
+<link rel="manifest" href="manifest.json">
+<title>RAAZ4 - Learn</title>
+<script src="data/topics.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:#ffffff;
+  min-height:100vh;
+  color:#1e1b4b;
+  padding-bottom:90px;
+}
+
+/* Header */
+.hdr{
+  background:#ffffff;
+  border-bottom:1.5px solid #e0e7ff;
+  padding:12px 15px;
+  display:flex;align-items:center;gap:12px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(124,58,237,.08);
+}
+.bk{
+  background:#f3f0ff;border:none;
+  color:#7c3aed;width:36px;height:36px;
+  border-radius:50%;cursor:pointer;
+  font-size:1em;font-weight:800;
+  flex-shrink:0;
+}
+.hdr-t{
+  font-size:1em;font-weight:800;
+  color:#7c3aed;flex:1;
+}
+
+/* Language */
+.lang-row{
+  padding:10px 14px;
+  background:#f8f7ff;
+  border-bottom:1.5px solid #e0e7ff;
+  display:flex;gap:8px;align-items:center;
+}
+.lang-row label{
+  color:#6b7280;font-size:.78em;
+  font-weight:700;white-space:nowrap;
+}
+.lsel{
+  flex:1;padding:8px 10px;
+  background:#ffffff;
+  border:1.5px solid #e0e7ff;
+  border-radius:10px;color:#1e1b4b;
+  font-size:.83em;outline:none;
+  font-weight:600;font-family:inherit;
+}
+
+/* Loading */
+.load-wrap{
+  padding:80px 20px;text-align:center;
+}
+.spinner{
+  width:48px;height:48px;
+  border:3px solid #e0e7ff;
+  border-top:3px solid #7c3aed;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin:0 auto 16px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.load-txt{
+  color:#6b7280;font-size:.9em;
+  font-weight:600;
+}
+
+/* Topic Header */
+.t-hdr{
+  margin:14px;
+  border-radius:16px;
+  padding:20px 16px;
+  background:linear-gradient(135deg,#f3f0ff,#ede9fe);
+  border:1.5px solid #e0e7ff;
+  box-shadow:0 4px 15px rgba(124,58,237,.08);
+}
+.t-inner{
+  display:flex;align-items:center;gap:14px;
+}
+.t-em{font-size:3em}
+.t-title{
+  font-size:1.25em;font-weight:900;
+  color:#1e1b4b;margin-bottom:4px;
+}
+.t-sub{
+  font-size:.82em;color:#7c3aed;
+  font-weight:600;
+}
+
+/* Full Text - Main Content */
+.fulltext-card{
+  margin:0 14px 12px;
+  background:#ffffff;
+  border:1.5px solid #e0e7ff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 2px 10px rgba(124,58,237,.05);
+}
+.fulltext-hdr{
+  padding:12px 16px;
+  background:#f8f7ff;
+  border-bottom:1.5px solid #e0e7ff;
+  font-size:.85em;font-weight:800;
+  color:#7c3aed;
+  display:flex;align-items:center;gap:6px;
+}
+.fulltext-body{
+  padding:16px;
+}
+.fulltext-body p{
+  color:#374151;
+  font-size:.9em;
+  line-height:1.85;
+  text-align:justify;
+}
+
+/* Info Cards */
+.icard{
+  margin:0 14px 12px;
+  border-radius:14px;
+  padding:14px 16px;
+  border:1.5px solid;
+}
+.icard.fact{
+  background:#faf5ff;
+  border-color:#e9d5ff;
+}
+.icard.real{
+  background:#eff6ff;
+  border-color:#bfdbfe;
+}
+.icard.tip{
+  background:#f0fdf4;
+  border-color:#a7f3d0;
+}
+.icard h4{
+  font-size:.8em;font-weight:800;
+  margin-bottom:8px;
+  display:flex;align-items:center;gap:5px;
+}
+.icard.fact h4{color:#7c3aed}
+.icard.real h4{color:#1d4ed8}
+.icard.tip h4{color:#065f46}
+.icard p{
+  font-size:.84em;color:#374151;
+  line-height:1.7;
+}
+
+/* Voice Panel */
+.vpanel{
+  margin:0 14px 12px;
+  background:#f8f7ff;
+  border:1.5px solid #e0e7ff;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 2px 10px rgba(124,58,237,.05);
+}
+.vpanel-hdr{
+  font-size:.8em;font-weight:800;
+  color:#7c3aed;margin-bottom:12px;
+  display:flex;align-items:center;gap:6px;
+}
+.vbtns{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;margin-bottom:14px;
+}
+.vb{
+  padding:13px 4px;border:none;
+  border-radius:12px;font-size:.82em;
+  cursor:pointer;font-weight:800;
+  color:#fff;transition:all .2s;
+  font-family:inherit;
+  display:flex;flex-direction:column;
+  align-items:center;gap:3px;
+}
+.vb:active{transform:scale(.92)}
+.vb span{font-size:1.3em}
+.vb.play{background:linear-gradient(135deg,#10b981,#34d399)}
+.vb.pau{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.vb.stp{background:linear-gradient(135deg,#ef4444,#f87171)}
+.vb.rep{background:linear-gradient(135deg,#3b82f6,#60a5fa)}
+
+.spd-row{
+  display:flex;align-items:center;gap:10px;
+  background:#ffffff;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1.5px solid #e0e7ff;
+}
+.spd-row label{
+  color:#6b7280;font-size:.75em;
+  font-weight:700;white-space:nowrap;
+}
+.spd-row input{
+  flex:1;accent-color:#7c3aed;
+}
+.spd-row span{
+  color:#7c3aed;font-size:.82em;
+  font-weight:800;min-width:32px;
+  text-align:right;
+}
+
+/* Voice Status */
+.vstatus{
+  margin-top:10px;
+  padding:8px 12px;
+  background:#ffffff;
+  border-radius:10px;
+  border:1.5px solid #e0e7ff;
+  font-size:.75em;
+  color:#6b7280;
+  font-weight:600;
+  text-align:center;
+}
+
+/* Quiz */
+.qsec{margin:0 14px 12px}
+.qhdr{
+  text-align:center;
+  padding:18px;
+  background:linear-gradient(135deg,#f3f0ff,#ede9fe);
+  border:1.5px solid #e0e7ff;
+  border-radius:16px;
+  margin-bottom:12px;
+}
+.qhdr h3{
+  font-size:1.1em;font-weight:900;
+  color:#1e1b4b;margin-bottom:4px;
+}
+.qhdr p{
+  color:#7c3aed;font-size:.8em;
+  font-weight:600;
+}
+
+.qcard{
+  background:#ffffff;
+  border:1.5px solid #e0e7ff;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:10px;
+  box-shadow:0 2px 8px rgba(124,58,237,.05);
+}
+.qnum{
+  color:#7c3aed;font-size:.72em;
+  margin-bottom:6px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.qtxt{
+  font-size:.92em;color:#1e1b4b;
+  line-height:1.6;margin-bottom:14px;
+  font-weight:700;
+}
+.qopts{
+  display:flex;flex-direction:column;gap:8px;
+}
+.opt{
+  padding:12px 14px;
+  background:#f8f7ff;
+  border:1.5px solid #e0e7ff;
+  border-radius:10px;
+  color:#374151;font-size:.84em;
+  cursor:pointer;text-align:left;
+  transition:all .2s;width:100%;
+  font-weight:600;font-family:inherit;
+  display:flex;align-items:center;gap:8px;
+}
+.opt::before{
+  content:'○';color:#c4b5fd;
+  font-size:.9em;flex-shrink:0;
+}
+.opt:hover{
+  border-color:#7c3aed;
+  background:#f3f0ff;
+}
+.opt.ok{
+  border-color:#10b981;
+  background:#d1fae5;color:#065f46;
+  font-weight:800;
+}
+.opt.ok::before{content:'✓';color:#10b981}
+.opt.no{
+  border-color:#ef4444;
+  background:#fee2e2;color:#991b1b;
+  font-weight:800;
+}
+.opt.no::before{content:'✗';color:#ef4444}
+.opt:disabled{cursor:not-allowed;opacity:.8}
+
+.qexp{
+  display:none;
+  margin-top:10px;padding:12px 14px;
+  background:#faf5ff;
+  border-left:3px solid #7c3aed;
+  border-radius:0 10px 10px 0;
+  font-size:.8em;color:#374151;
+  line-height:1.7;font-weight:500;
+}
+
+/* Result */
+.qresult{
+  display:none;
+  text-align:center;padding:28px 20px;
+  background:linear-gradient(135deg,#f3f0ff,#ede9fe);
+  border:1.5px solid #e0e7ff;
+  border-radius:16px;margin-top:12px;
+}
+.qresult .rem{font-size:3em;margin-bottom:8px}
+.qresult .big{
+  font-size:3em;font-weight:900;
+  color:#7c3aed;margin-bottom:4px;
+}
+.qresult .msg{
+  color:#6b7280;font-size:.9em;
+  margin-bottom:6px;font-weight:600;
+}
+.qresult .pts{
+  color:#10b981;font-size:.85em;
+  font-weight:800;margin-bottom:16px;
+}
+.retry{
+  padding:12px 28px;
+  background:linear-gradient(135deg,#7c3aed,#6366f1);
+  border:none;border-radius:12px;
+  color:#fff;font-size:.9em;
+  font-weight:800;cursor:pointer;
+  box-shadow:0 4px 12px rgba(124,58,237,.3);
+  font-family:inherit;
+}
+
+/* No Data */
+.nodata{
+  margin:20px 14px;
+  background:#fff7ed;
+  border:1.5px solid #fed7aa;
+  border-radius:14px;
+  padding:28px 20px;text-align:center;
+}
+.nodata h4{
+  color:#c2410c;margin-bottom:8px;
+  font-size:1em;
+}
+.nodata p{
+  color:#6b7280;font-size:.84em;
+  line-height:1.6;margin-bottom:14px;
+}
+.nodata button{
+  padding:11px 22px;
+  background:linear-gradient(135deg,#7c3aed,#6366f1);
+  border:none;border-radius:10px;
+  color:#fff;font-size:.88em;
+  cursor:pointer;font-weight:700;
+  font-family:inherit;
+}
+
+/* Bottom Nav */
+.bnav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:#ffffff;
+  border-top:1.5px solid #e0e7ff;
+  display:flex;padding:8px 0 12px;
+  box-shadow:0 -2px 12px rgba(124,58,237,.08);
+}
+.nb{
+  flex:1;background:none;border:none;
+  color:#c4b5fd;font-size:.68em;
+  padding:6px;cursor:pointer;
+  display:flex;flex-direction:column;
+  align-items:center;gap:2px;
+  font-weight:700;font-family:inherit;
+}
+.nb .ic{font-size:1.35em}
+.nb.active{color:#7c3aed}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <button class="bk" onclick="history.back()">←</button>
+  <div class="hdr-t">🧠 RAAZ4 — Learn</div>
+</div>
+
+<div class="lang-row">
+  <label>🌍 Language:</label>
+  <select class="lsel" id="langSel" onchange="onLangChange()">
+    <option value="en">🇺🇸 English</option>
+    <option value="hi">🇮🇳 हिंदी</option>
+  </select>
+</div>
+
+<div id="main"></div>
+
+<div class="bnav">
+  <button class="nb" onclick="location.href='home.html'">
+    <span class="ic">🏠</span>Home
+  </button>
+  <button class="nb active">
+    <span class="ic">📖</span>Learn
+  </button>
+  <button class="nb" onclick="location.href='quiz.html'">
+    <span class="ic">🎮</span>Quiz
+  </button>
+  <button class="nb" onclick="showBoard()">
+    <span class="ic">🏆</span>Rank
+  </button>
+</div>
+
+<script>
+// ── User Check ──
+const user=JSON.parse(localStorage.getItem('raaz4_user')||'null');
+if(!user)location.href='index.html';
+
+// ── Voice Setup ──
+const sy=window.speechSynthesis;
+let voices=[],spRate=0.9,resumeT=null;
+let curVoiceText='',curData=null,curTopic='',curLD=null;
+let qAnswers={},qScore=0;
+
+// Voices load karo
+function initVoices(){
+  voices=sy.getVoices();
+}
+initVoices();
+if(sy.onvoiceschanged!==undefined){
+  sy.onvoiceschanged=initVoices;
+}
+
+// Language
+const savedLang=localStorage.getItem('raaz4_lang')||'en';
+document.getElementById('langSel').value=savedLang;
+
+function getLang(){
+  return document.getElementById('langSel').value;
+}
+
+function onLangChange(){
+  const lang=getLang();
+  localStorage.setItem('raaz4_lang',lang);
+  sy.cancel();
+  clearInterval(resumeT);
+  if(curData)loadContent(curData,curTopic);
+}
+
+// ── Voice Functions ──
+function speak(){
+  if(!curVoiceText){
+    updateStatus('⚠️ Koi voice text nahi hai');
+    return;
+  }
+  sy.cancel();
+  clearInterval(resumeT);
+  const vl=curLD?.voiceLang||'en-US';
+  const u=new SpeechSynthesisUtterance(curVoiceText);
+  u.lang=vl;
+  u.rate=spRate;
+  u.pitch=1;
+  u.volume=1;
+
+  // Voice match karo
+  const match=
+    voices.find(v=>v.lang===vl)||
+    voices.find(v=>v.lang.startsWith(vl.split('-')[0]))||
+    voices[0];
+  if(match)u.voice=match;
+
+  // Android Chrome 15 second bug fix
+  resumeT=setInterval(()=>{
+    if(sy.speaking&&!sy.paused){
+      sy.pause();
+      sy.resume();
+    }
+  },10000);
+
+  u.onstart=()=>updateStatus('▶️ Playing...');
+  u.onpause=()=>updateStatus('⏸️ Paused');
+  u.onresume=()=>updateStatus('▶️ Playing...');
+  u.onend=()=>{
+    clearInterval(resumeT);
+    updateStatus('✅ Done!');
+  };
+  u.onerror=e=>{
+    clearInterval(resumeT);
+    if(e.error!=='interrupted'){
+      updateStatus('❌ Voice error - TTS install karo');
+      alert(
+        'Voice nahi chal rahi!\n\n'+
+        'Fix karo:\n'+
+        '1. Settings kholo\n'+
+        '2. Accessibility → Text-to-Speech\n'+
+        '3. Language pack install karo\n'+
+        '4. Wapas aao aur try karo'
+      );
+    }
+  };
+  sy.speak(u);
+}
+
+function pauseV(){
+  if(sy.paused){
+    sy.resume();
+    updateStatus('▶️ Playing...');
+  }else{
+    sy.pause();
+    updateStatus('⏸️ Paused');
+  }
+}
+
+function stopV(){
+  sy.cancel();
+  clearInterval(resumeT);
+  updateStatus('⏹️ Stopped');
+}
+
+function replayV(){
+  stopV();
+  setTimeout(speak,300);
+}
+
+function updateStatus(txt){
+  const el=document.getElementById('vstatus');
+  if(el)el.textContent=txt;
+}
+
+// ── Quiz Functions ──
+function pick(qi,chosen,correct){
+  if(qAnswers[qi]!==undefined)return;
+  qAnswers[qi]={chosen,correct};
+  if(chosen===correct)qScore++;
+
+  // Buttons disable karo
+  document.querySelectorAll(`[id^="o_${qi}_"]`)
+    .forEach(b=>b.disabled=true);
+
+  // Color lagao
+  const chosenEl=document.getElementById(`o_${qi}_${chosen}`);
+  if(chosenEl)chosenEl.classList.add(
+    chosen===correct?'ok':'no'
+  );
+
+  // Correct answer dikhao
+  const correctEl=document.getElementById(`o_${qi}_${correct}`);
+  if(correctEl&&chosen!==correct)
+    correctEl.classList.add('ok');
+
+  // Explanation dikhao
+  const exp=document.getElementById(`exp_${qi}`);
+  if(exp)exp.style.display='block';
+
+  // Quiz khatam hua?
+  const total=(curLD?.quiz||[]).length;
+  if(Object.keys(qAnswers).length===total){
+    finishQuiz(total);
+  }
+}
+
+function finishQuiz(total){
+  const pct=total?Math.round((qScore/total)*100):0;
+  let rem,msg;
+  if(pct>=80){rem='🏆';msg='Excellent! Shabaash!';}
+  else if(pct>=60){rem='🎯';msg='Bahut Achha!';}
+  else if(pct>=40){rem='💪';msg='Keep Going!';}
+  else{rem='📚';msg='Phir se padhein!';}
+
+  const el=document.getElementById('qres');
+  if(!el)return;
+  el.style.display='block';
+  document.getElementById('qrem').textContent=rem;
+  document.getElementById('qfin').textContent=
+    `${qScore}/${total}`;
+  document.getElementById('qmsg').textContent=msg;
+
+  const pts=qScore*20;
+  document.getElementById('qpts').textContent=
+    pts>0?`+${pts} points earned!`:'Keep trying!';
+
+  // Score save karo
+  if(pts>0){
+    const users=JSON.parse(
+      localStorage.getItem('raaz4_users')||'[]'
+    );
+    const i=users.findIndex(u=>u.username===user.username);
+    if(i!==-1){
+      users[i].score=(users[i].score||0)+pts;
+      users[i].level=Math.floor(users[i].score/100)+1;
+      if(!users[i].completedTopics.includes(curTopic)){
+        users[i].completedTopics.push(curTopic);
+      }
+      localStorage.setItem('raaz4_users',JSON.stringify(users));
+      localStorage.setItem('raaz4_user',JSON.stringify(users[i]));
+    }
+  }
+}
+
+function retryQ(){
+  qAnswers={};qScore=0;
+  loadContent(curData,curTopic);
+}
+
+// ── Render Content ──
+function renderContent(ld,quiz){
+  curLD=ld;
+  curVoiceText=ld.voiceText||ld.fullText||'';
+
+  let html='';
+
+  // Topic Header
+  html+=`
+  <div class="t-hdr">
+    <div class="t-inner">
+      <span class="t-em">${curData.emoji||'🧠'}</span>
+      <div>
+        <div class="t-title">${curTopic}</div>
+        <div class="t-sub">${ld.subtitle||''}</div>
+      </div>
+    </div>
+  </div>`;
+
+  // Full Paragraph Text
+  if(ld.fullText){
+    html+=`
+    <div class="fulltext-card">
+      <div class="fulltext-hdr">
+        📖 Complete Guide
+      </div>
+      <div class="fulltext-body">
+        <p>${ld.fullText.replace(/\n\n/g,'</p><p style="margin-top:12px">').replace(/\n/g,'<br>')}</p>
+      </div>
+    </div>`;
+  }
+
+  // Key Fact
+  if(ld.keyFact){
+    html+=`
+    <div class="icard fact">
+      <h4>💡 Key Fact</h4>
+      <p>${ld.keyFact}</p>
+    </div>`;
+  }
+
+  // Real Life Example
+  if(ld.realLife){
+    html+=`
+    <div class="icard real">
+      <h4>🌍 Real Life Example</h4>
+      <p>${ld.realLife}</p>
+    </div>`;
+  }
+
+  // Protection Tip
+  if(ld.protectTip){
+    html+=`
+    <div class="icard tip">
+      <h4>🛡️ Protection Tip</h4>
+      <p>${ld.protectTip}</p>
+    </div>`;
+  }
+
+  // Voice Panel
+  html+=`
+  <div class="vpanel">
+    <div class="vpanel-hdr">🔊 Voice Controls</div>
+    <div class="vbtns">
+      <button class="vb play" onclick="speak()">
+        <span>▶️</span>Play
+      </button>
+      <button class="vb pau" onclick="pauseV()">
+        <span>⏸️</span>Pause
+      </button>
+      <button class="vb stp" onclick="stopV()">
+        <span>⏹️</span>Stop
+      </button>
+      <button class="vb rep" onclick="replayV()">
+        <span>↺</span>Replay
+      </button>
+    </div>
+    <div class="spd-row">
+      <label>Speed:</label>
+      <input type="range" min=".5" max="2"
+        step=".1" value="${spRate}"
+        oninput="spRate=parseFloat(this.value);
+        document.getElementById('spv').textContent=
+        this.value+'x'">
+      <span id="spv">${spRate}x</span>
+    </div>
+    <div class="vstatus" id="vstatus">
+      🎤 Play button dabao - voice sunne ke liye
+    </div>
+  </div>`;
+
+  // Quiz
+  if((quiz||[]).length){
+    html+=`
+    <div class="qsec">
+      <div class="qhdr">
+        <h3>🎮 Quiz Time!</h3>
+        <p>Padhne ke baad apna knowledge test karo</p>
+      </div>`;
+
+    quiz.forEach((q,i)=>{
+      html+=`
+      <div class="qcard">
+        <div class="qnum">
+          Question ${i+1} of ${quiz.length}
+        </div>
+        <div class="qtxt">${q.q}</div>
+        <div class="qopts">
+          ${q.o.map((o,j)=>`
+          <button class="opt"
+            id="o_${i}_${j}"
+            onclick="pick(${i},${j},${q.a})">
+            ${o}
+          </button>`).join('')}
+        </div>
+        <div class="qexp" id="exp_${i}">
+          💡 ${q.exp}
+        </div>
+      </div>`;
+    });
+
+    html+=`
+    <div class="qresult" id="qres">
+      <div class="rem" id="qrem">🎉</div>
+      <div class="big" id="qfin">0/0</div>
+      <div class="msg" id="qmsg"></div>
+      <div class="pts" id="qpts"></div>
+      <button class="retry" onclick="retryQ()">
+        ↺ Try Again
+      </button>
+    </div>
+    </div>`;
+  }
+
+  document.getElementById('main').innerHTML=html;
+}
+
+// ── Load Topic ──
+function loadContent(data,topic){
+  curData=data;
+  curTopic=topic;
+  qAnswers={};qScore=0;
+
+  const lang=getLang();
+
+  // Language data lo
+  const ld=
+    (data.content&&data.content[lang])||
+    (data.content&&data.content['en'])||
+    null;
+
+  // Quiz lo
+  const quiz=
+    (data.quiz&&data.quiz[lang])||
+    (data.quiz&&data.quiz['en'])||
+    [];
+
+  if(!ld){
+    document.getElementById('main').innerHTML=`
+    <div class="nodata">
+      <h4>⏳ Data Coming Soon!</h4>
+      <p>"${topic}" ka content jald hi available hoga.<br>
+      Tab tak doosre topics try karo!</p>
+      <button onclick="location.href='home.html'">
+        🏠 Home Pe Jao
+      </button>
+    </div>`;
+    return;
+  }
+
+  renderContent(ld,quiz);
+}
+
+// Leaderboard
+function showBoard(){
+  const users=JSON.parse(
+    localStorage.getItem('raaz4_users')||'[]'
+  );
+  const top=users
+    .sort((a,b)=>(b.score||0)-(a.score||0))
+    .slice(0,10);
+  if(!top.length)return alert('Abhi koi score nahi!');
+  alert('🏆 LEADERBOARD\n\n'+
+    top.map((u,i)=>
+      `${i+1}. ${u.name} — ${u.score||0}pts (Lv.${u.level||1})`
+    ).join('\n'));
+}
+
+// ── Init ──
+// Loading show karo
+document.getElementById('main').innerHTML=`
+<div class="load-wrap">
+  <div class="spinner"></div>
+  <div class="load-txt">Loading topic...</div>
+</div>`;
+
+// Topic load karo
+setTimeout(()=>{
+  const topic=localStorage.getItem('raaz4_topic')||
+    'Dark Psychology';
+  const data=window.RAAZ4_DATA&&
+    window.RAAZ4_DATA[topic];
+  if(data){
+    loadContent(data,topic);
+  }else{
+    document.getElementById('main').innerHTML=`
+    <div class="nodata">
+      <h4>⏳ Data Coming Soon!</h4>
+      <p>"${topic}" ka content jald hi available hoga.</p>
+      <button onclick="location.href='home.html'">
+        🏠 Home Pe Jao
+      </button>
+    </div>`;
+  }
+},300);
+</script>
+</body>
+</html>
