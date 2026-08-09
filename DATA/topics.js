@@ -1,3 +1,5 @@
+window.RAAZ4_DATA = {};
+
 window.RAAZ4_DATA['Dark Psychology'] = {
 emoji: '🕵️',
 color: '#2c3e50',
