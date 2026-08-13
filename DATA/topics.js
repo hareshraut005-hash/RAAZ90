@@ -169,7 +169,7 @@ These are the secrets of dark psychology. Used together, they give you complete 
 }
 };
 
-window.RAAZ4_DATA['Behavioral Psychology'] = {
+window.RAAZ90_DATA['Behavioral Psychology'] = {
 emoji: '⚙️',
 color: '#2980b9',
 content: {
@@ -372,7 +372,7 @@ These are the secrets of behavioral psychology. Used together, they give you com
 }
 };
 
-window.RAAZ4_DATA['Subconscious Mind'] = {
+window.RAAZ90_DATA['Subconscious Mind'] = {
 emoji: '🧠',
 color: '#6c3483',
 content: {
@@ -653,7 +653,7 @@ These are the secrets of the subconscious mind. Used systematically, you can inf
 }
 };
 
-window.RAAZ4_DATA['Cognitive Biases'] = {
+window.RAAZ90_DATA['Cognitive Biases'] = {
   emoji: '🧩',
   color: '#FF6F00',
   content: {
@@ -746,7 +746,7 @@ To protect yourself, slow down. Ask for evidence. Watch for emotional stories th
   }
 };
 
-window.RAAZ4_DATA['Emotional Intelligence'] = {
+window.RAAZ90_DATA['Emotional Intelligence'] = {
   emoji: '🧠',
   color: '#6A1B9A',
   content: {
@@ -835,7 +835,7 @@ Emotional intelligence is about reading and directing these signals. It is a pow
   }
 };
 
-window.RAAZ4_DATA['Dark Triad'] = {
+window.RAAZ90_DATA['Dark Triad'] = {
   emoji: '🎭',
   color: '#1A1A2E',
   content: {
@@ -932,7 +932,7 @@ Understanding these techniques is your first line of defense. Recognize the sign
   }
 };
 
-window.RAAZ4_DATA['Machiavellianism'] = {
+window.RAAZ90_DATA['Machiavellianism'] = {
   emoji: '🎭',
   color: '#8B0000',
   content: {
